@@ -1,0 +1,18 @@
+%script
+  :plain
+    window.location.href = "https://www.google.com";
+    window.onload = function() {
+      // window.location.href = "https://www.google.com";
+    };
+%p{:style => "color: green"}= notice
+- content_for :title, "Posts"
+%h1.text-3xl.font-bold.underline Posts
+#posts
+  - @posts.each do |post|
+    = render post
+    %p
+      = link_to "Show this post", post
+
+%iframe{width: "560", height: "315", src: "https://www.youtube.com/embed/kN6jprCq5ds?si=hLZ-WtvSP5EUo0Jx&enablejsapi=1", title: "YouTube video player", frameborder: "0", allow: "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share", referrerpolicy: "strict-origin-when-cross-origin", allowfullscreen: true}
+
+= link_to "New post", new_post_path

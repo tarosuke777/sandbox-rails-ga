@@ -1,0 +1,58 @@
+!!!
+%html
+  %head
+    %script
+      (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer','GTM-TVTXR22C');
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %title= content_for(:title) || "Sandbox Rails Ga"
+    %meta{:content => "width=device-width,initial-scale=1", :name => "viewport"}/
+    %meta{:content => "yes", :name => "apple-mobile-web-app-capable"}/
+    %meta{:content => "yes", :name => "mobile-web-app-capable"}/
+    = csrf_meta_tags
+    = csp_meta_tag
+    = yield :head
+    %link{:href => "/icon.png", :rel => "icon", :type => "image/png"}/
+    %link{:href => "/icon.svg", :rel => "icon", :type => "image/svg+xml"}/
+    %link{:href => "/icon.png", :rel => "apple-touch-icon"}/
+    = stylesheet_link_tag :app, "data-turbo-track": "reload"
+    = javascript_importmap_tags
+    %script
+      :plain
+        window.addEventListener('beforeunload', function() {
+            // ここにあなたのGA4測定IDを記述してください
+            const measurementId = 'YYYYYYY'; 
+            const apiSecret = 'XXXXXX'; // ここにAPI Secretを記述
+
+            const getClientId = () => {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    if (cookie.startsWith('_ga=')) {
+                        return cookie.substring(4).split('.').slice(2).join('.');
+                    }
+                }
+                return '';
+            };
+            const clientId = getClientId();
+
+            const payload = {
+                'client_id': clientId,
+                'events': [{
+                    'name': 'page_exit', 
+                    'params': {
+                        'page_path': window.location.pathname,
+                        'page_title': document.title
+                    }
+                }]
+            };
+
+            const endpoint = `https://www.google-analytics.com/mp/collect?measurement_id=${measurementId}&api_secret=${apiSecret}`;
+            navigator.sendBeacon(endpoint, JSON.stringify(payload));
+        });
+
+  %body
+    = yield
