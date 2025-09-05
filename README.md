@@ -21,4 +21,10 @@ Things you may want to cover:
 
 * Deployment instructions
 
-* ...
+* GTMのイベントコールバックの参考サイト
+
+https://www.simoahava.com/gtm-tips/hitcallback-eventcallback/
+
+https://www.simoahava.com/analytics/check-container-id-with-eventcallback/
+
+https://stackoverflow.com/questions/68373799/google-tag-manager-using-eventcallback-with-multiple-containers
