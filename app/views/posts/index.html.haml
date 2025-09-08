@@ -4,14 +4,17 @@
       // window.location.href = "https://www.google.com";
     };
     function loginAction() {
-      event.preventDefault() 
       window.dataLayer = window.dataLayer || [];
       dataLayer.push({
-        'event': 'login',
+        'event': 'login_success',
+        'login_param': 'testtesttest-login-param',
         'eventCallback': function(containerId) {
           console.log('Container ID: ' + containerId);
         }
       });
+      setTimeout(() => {
+        console.log('memo');
+      }, 0);
     }
 
 %p{:style => "color: green"}= notice
@@ -25,6 +28,6 @@
 
 %button{onclick: "loginAction()"} ログイン
 
-%iframe{width: "560", height: "315", src: "https://www.youtube.com/embed/kN6jprCq5ds?si=hLZ-WtvSP5EUo0Jx&enablejsapi=1", title: "YouTube video player", frameborder: "0", allow: "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share", referrerpolicy: "strict-origin-when-cross-origin", allowfullscreen: true}
+-#%iframe{width: "560", height: "315", src: "https://www.youtube.com/embed/kN6jprCq5ds?si=hLZ-WtvSP5EUo0Jx&enablejsapi=1", title: "YouTube video player", frameborder: "0", allow: "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share", referrerpolicy: "strict-origin-when-cross-origin", allowfullscreen: true}
 
 = link_to "New post", new_post_path
